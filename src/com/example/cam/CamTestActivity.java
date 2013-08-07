@@ -44,28 +44,32 @@ public class CamTestActivity extends Activity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.main);
-		
-		preview = new Preview(this, (SurfaceView)findViewById(R.id.surfaceView));
-		preview.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+
+		preview = new Preview(this,
+				(SurfaceView) findViewById(R.id.surfaceView));
+		preview.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+				LayoutParams.FILL_PARENT));
 		((FrameLayout) findViewById(R.id.preview)).addView(preview);
 		preview.setKeepScreenOn(true);
-		
+
 		buttonClick = (Button) findViewById(R.id.buttonClick);
-		
+
 		buttonClick.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				//				preview.camera.takePicture(shutterCallback, rawCallback, jpegCallback);
+				// preview.camera.takePicture(shutterCallback, rawCallback,
+				// jpegCallback);
 				camera.takePicture(shutterCallback, rawCallback, jpegCallback);
 			}
 		});
-		
-		buttonClick.setOnLongClickListener(new OnLongClickListener(){
+
+		buttonClick.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View arg0) {
-				camera.autoFocus(new AutoFocusCallback(){
+				camera.autoFocus(new AutoFocusCallback() {
 					@Override
 					public void onAutoFocus(boolean arg0, Camera arg1) {
-						//camera.takePicture(shutterCallback, rawCallback, jpegCallback);
+						// camera.takePicture(shutterCallback, rawCallback,
+						// jpegCallback);
 					}
 				});
 				return true;
@@ -76,7 +80,7 @@ public class CamTestActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//      preview.camera = Camera.open();
+		// preview.camera = Camera.open();
 		camera = Camera.open();
 		camera.startPreview();
 		preview.setCamera(camera);
@@ -84,7 +88,7 @@ public class CamTestActivity extends Activity {
 
 	@Override
 	protected void onPause() {
-		if(camera != null) {
+		if (camera != null) {
 			camera.stopPreview();
 			preview.setCamera(null);
 			camera.release();
@@ -115,7 +119,8 @@ public class CamTestActivity extends Activity {
 			FileOutputStream outStream = null;
 			try {
 				// Write to SD Card
-				fileName = String.format("/sdcard/camtest/%d.jpg", System.currentTimeMillis());
+				fileName = String.format("/sdcard/camtest/%d.jpg",
+						System.currentTimeMillis());
 				outStream = new FileOutputStream(fileName);
 				outStream.write(data);
 				outStream.close();
