@@ -8,8 +8,7 @@
     <FrameLayout
         android:id="@+id/preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       	android:layout_above="@+id/camera_controls" >
+        android:layout_height="match_parent" >
 
         <SurfaceView
             android:id="@+id/surfaceView"
@@ -18,17 +17,48 @@
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/camera_controls"
+        android:id="@+id/camera_take_controls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="#00FFFFFF"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="visible" >
 
         <Button
-            android:id="@+id/buttonClick"
+            android:id="@+id/camera_take"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:text="Take" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/camera_use_controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#00FFFFFF"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/camera_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Use" />
+
+        <Button
+            android:id="@+id/camera_reject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Retake" />
     </LinearLayout>
 
 </RelativeLayout>
