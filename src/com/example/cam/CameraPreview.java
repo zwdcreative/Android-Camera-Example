@@ -40,7 +40,6 @@ class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
     public void setCamera(Camera camera) {
     	
     	mCamera = camera;
-    	mCamera.setDisplayOrientation(90);
     	
     	if (mCamera != null) {
     		mSupportedPreviewSizes = mCamera.getParameters().getSupportedPreviewSizes();
@@ -159,7 +158,14 @@ class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
     		Camera.Parameters parameters = mCamera.getParameters();
     		parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
     		requestLayout();
-
+    		
+    		if(h > w) {
+    			// Portrait
+    			mCamera.setDisplayOrientation(90);
+    		} else {
+    			// Horizontal
+    			mCamera.setDisplayOrientation(180);
+    		}
     		mCamera.setParameters(parameters);
     		mCamera.startPreview();
     	}

@@ -81,6 +81,7 @@ public class CamTestActivity extends Activity {
 		super.onResume();
 		camera = Camera.open();
 		camera.startPreview();
+		camera.setDisplayOrientation(90);
 		mCameraPreview.setCamera(camera);
 	}
 
