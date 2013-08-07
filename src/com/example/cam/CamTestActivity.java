@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
 import android.os.Bundle;
@@ -27,37 +28,35 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 public class CamTestActivity extends Activity {
+
 	private static final String TAG = "CamTestActivity";
-	Preview preview;
+
+	CameraPreview mCameraPreview;
 	Button buttonClick;
 	Camera camera;
 	String fileName;
-	Activity act;
-	Context ctx;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
-		ctx = this;
-		act = this;
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.main);
 
-		preview = new Preview(this,
+		mCameraPreview = new CameraPreview(this,
 				(SurfaceView) findViewById(R.id.surfaceView));
-		preview.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT));
-		((FrameLayout) findViewById(R.id.preview)).addView(preview);
-		preview.setKeepScreenOn(true);
+		mCameraPreview.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT));
+		((FrameLayout) findViewById(R.id.preview)).addView(mCameraPreview);
+		mCameraPreview.setKeepScreenOn(true);
 
 		buttonClick = (Button) findViewById(R.id.buttonClick);
 
 		buttonClick.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// preview.camera.takePicture(shutterCallback, rawCallback,
-				// jpegCallback);
 				camera.takePicture(shutterCallback, rawCallback, jpegCallback);
 			}
 		});
@@ -80,17 +79,16 @@ public class CamTestActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// preview.camera = Camera.open();
 		camera = Camera.open();
 		camera.startPreview();
-		preview.setCamera(camera);
+		mCameraPreview.setCamera(camera);
 	}
 
 	@Override
 	protected void onPause() {
 		if (camera != null) {
 			camera.stopPreview();
-			preview.setCamera(null);
+			mCameraPreview.setCamera(null);
 			camera.release();
 			camera = null;
 		}
@@ -99,7 +97,7 @@ public class CamTestActivity extends Activity {
 
 	private void resetCam() {
 		camera.startPreview();
-		preview.setCamera(camera);
+		mCameraPreview.setCamera(camera);
 	}
 
 	ShutterCallback shutterCallback = new ShutterCallback() {

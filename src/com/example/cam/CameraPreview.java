@@ -16,7 +16,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
-class Preview extends ViewGroup implements SurfaceHolder.Callback {
+class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
+	
     private final String TAG = "Preview";
 
     SurfaceView mSurfaceView;
@@ -25,11 +26,11 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
     List<Size> mSupportedPreviewSizes;
     Camera mCamera;
 
-    Preview(Context context, SurfaceView sv) {
+    CameraPreview(Context context, SurfaceView sv) {
+    	
         super(context);
 
         mSurfaceView = sv;
-//        addView(mSurfaceView);
        
         mHolder = mSurfaceView.getHolder();
         mHolder.addCallback(this);
@@ -37,7 +38,10 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
     }
 
     public void setCamera(Camera camera) {
+    	
     	mCamera = camera;
+    	mCamera.setDisplayOrientation(90);
+    	
     	if (mCamera != null) {
     		mSupportedPreviewSizes = mCamera.getParameters().getSupportedPreviewSizes();
     		requestLayout();
