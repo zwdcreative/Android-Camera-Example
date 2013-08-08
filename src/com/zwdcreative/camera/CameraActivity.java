@@ -4,18 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.example.cam.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
-import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
-import android.media.MediaActionSound;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -25,9 +21,11 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import com.example.cam.R;
 
 public class CameraActivity extends Activity {
 
@@ -35,7 +33,7 @@ public class CameraActivity extends Activity {
 
 	private CameraPreview mCameraPreview;
 	private LinearLayout mTakeCameraControls, mUseCameraControls;
-	private Button mTakeButton, mAcceptButton, mRetakeButton;
+	private ImageButton mTakeButton, mAcceptButton, mRetakeButton;
 	private Camera mCamera;
 	private byte[] mPhotoData;
 	private String fileName;
@@ -44,9 +42,9 @@ public class CameraActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		
+
 		// Check for a camera
-		if(!checkCameraHardware(this)) {
+		if (!checkCameraHardware(this)) {
 			finish();
 		}
 
@@ -67,9 +65,9 @@ public class CameraActivity extends Activity {
 		// Setup UI controls
 		mTakeCameraControls = (LinearLayout) findViewById(R.id.camera_take_controls);
 		mUseCameraControls = (LinearLayout) findViewById(R.id.camera_use_controls);
-		mTakeButton = (Button) findViewById(R.id.camera_take);
-		mAcceptButton = (Button) findViewById(R.id.camera_accept);
-		mRetakeButton = (Button) findViewById(R.id.camera_reject);
+		mTakeButton = (ImageButton) findViewById(R.id.camera_take);
+		mAcceptButton = (ImageButton) findViewById(R.id.camera_accept);
+		mRetakeButton = (ImageButton) findViewById(R.id.camera_reject);
 
 		// Setup event listeners
 		mTakeButton.setOnClickListener(new OnClickListener() {

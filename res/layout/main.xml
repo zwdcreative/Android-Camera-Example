@@ -27,12 +27,13 @@
         android:padding="10dp"
         android:visibility="visible" >
 
-        <Button
+        <ImageButton
             android:id="@+id/camera_take"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Take" />
+            android:src="@drawable/camera_take_photo_icon"
+            android:background="@drawable/camera_bg" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,19 +47,23 @@
         android:padding="10dp"
         android:visibility="gone" >
 
-        <Button
+        <ImageButton
             android:id="@+id/camera_accept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Use" />
+            android:src="@drawable/camera_taken_accept_icon"
+            android:background="@drawable/camera_bg" 
+            android:layout_marginRight="10dp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/camera_reject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Retake" />
+            android:src="@drawable/camera_taken_reject_icon"
+            android:background="@drawable/camera_bg"
+            android:layout_marginLeft="10dp" />
     </LinearLayout>
 
 </RelativeLayout>
